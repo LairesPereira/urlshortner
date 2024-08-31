@@ -7,11 +7,8 @@ import java.sql.*;
 
 @SpringBootApplication
 public class UrlShortnerApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(UrlShortnerApplication.class, args);
-		Connection conn = DB.getConnection();
-
 	}
 
 }

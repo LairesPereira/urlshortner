@@ -1,13 +1,14 @@
 package com.example.url_shortner.DAO;
 
+import com.example.url_shortner.models.URL;
+import org.springframework.stereotype.Service;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
+@Service
 public class DB {
 
     private static Connection conn = null;
