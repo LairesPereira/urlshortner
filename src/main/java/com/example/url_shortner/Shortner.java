@@ -5,10 +5,7 @@ import com.example.url_shortner.models.URL;
 import com.example.url_shortner.services.UrlServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +15,12 @@ import java.sql.SQLException;
 public class Shortner {
     @Autowired
     UrlServices urlServices;
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
 
-    @RequestMapping(value = "/{urlEncoded}")
+    @RequestMapping(value = "/{urlEncoded}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public URL getRoute(@PathVariable(value = "urlEncoded") String urlEncoded) {
         URL result = urlServices.findUrlByEncodedUrl(urlEncoded);
         return result;

@@ -17,16 +17,21 @@ public class UrlServices {
     UrlDAO urlDAO;
 
     public URL findUrlByEncodedUrl(String urlEncoded) {
+        URL url = new URL();
+        System.out.println("new request");
         try {
             ResultSet resultSet = urlDAO.findUrl(urlEncoded);
-            URL url = new URL(
-                    resultSet.getString("originalUrl"),
-                    resultSet.getString("keyUrl")
-            );
-            return url;
+            if(resultSet.next()) {
+                url.setOriginalUrl(resultSet.getString("originalUrl"));
+                url.setEncodedUrl(resultSet.getString("keyUrl"));
+            } else {
+                url.setError(true);
+                url.setErrorMessage("URL not found");
+            }
         } catch (SQLException e) {
-            throw new UrlDaoException("Erro interno na busca e leitura da url da URL");
+            throw new RuntimeException(e);
         }
+        return url;
     }
 
     public boolean createNewShortUrl(URL url) {
