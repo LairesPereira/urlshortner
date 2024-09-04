@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/")
 public class Shortner {
     @Autowired
     UrlServices urlServices;
@@ -20,19 +19,10 @@ public class Shortner {
         return "home";
     }
 
-    @RequestMapping(value = "/{urlEncoded}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{urlEncoded}", produces = MediaType.APPLICATION_JSON_VALUE)
     public URL getRoute(@PathVariable(value = "urlEncoded") String urlEncoded) {
         URL result = urlServices.findUrlByEncodedUrl(urlEncoded);
         return result;
     }
 
-    @RequestMapping(value = "create/{originalUrl}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public URL createNewShortUrl (@PathVariable("originalUrl") String originalUrl){
-        URL url = new URL(originalUrl);
-        if(urlServices.createNewShortUrl(url)) {
-            return url;
-        } else {
-            throw new UrlDaoException("URL já existente no servidor.");
-        }
-    }
 }
