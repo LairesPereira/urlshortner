@@ -20,7 +20,7 @@ public class UrlDAO {
             PreparedStatement st = conn.prepareStatement(query);
             return st.executeUpdate();
         } catch (SQLException e) {
-            throw new UrlDaoException("URL ja existente no servidor.");
+            return 0;
         }
     }
 
