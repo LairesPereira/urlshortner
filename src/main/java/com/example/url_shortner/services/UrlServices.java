@@ -35,6 +35,20 @@ public class UrlServices {
     }
 
     public boolean createNewShortUrl(URL url) {
-        return urlDAO.insertUrl(url) == 1;
+        int conflictControlCounter = 0;
+        try {
+            while(urlDAO.findUrl(url.getEncodedUrl()).next()) { // check if the encoded random key already exists, if so, re-generate encoded key
+                System.err.println("conflict");
+                url.renewEncodedUrl();
+                conflictControlCounter++;
+                if (conflictControlCounter > 10) { // prevents infinite loop
+                    return false;
+                }
+            };
+            return urlDAO.insertUrl(url) == 1;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        }
     }
 }

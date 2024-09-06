@@ -20,6 +20,7 @@ public class UrlDAO {
             PreparedStatement st = conn.prepareStatement(query);
             return st.executeUpdate();
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
             return 0;
         }
     }

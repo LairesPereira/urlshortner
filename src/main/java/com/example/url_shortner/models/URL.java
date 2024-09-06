@@ -36,14 +36,18 @@ public class URL {
         this.encodedUrl = encodedUrl;
     }
 
-    private void  encodedUrl() {
+    private void encodedUrl() {
         Random random = new Random();
-        this.encodedUrl = random.ints(5, 'a', 'z' + 1)
+        this.encodedUrl = random.ints(4, 'a', 'z' + 1)
                 .collect(
                         StringBuilder::new,
                         StringBuilder::appendCodePoint,
                         StringBuilder::append
                 ).toString();
+    }
+
+    public void renewEncodedUrl() {
+        this.encodedUrl();
     }
 
     public String getOriginalUrl() {
@@ -55,10 +59,20 @@ public class URL {
     }
 
     public String getEncodedUrl() {
-        return encodedUrl;
+        return this.encodedUrl;
     }
 
     public void setEncodedUrl(String encodedUrl) {
         this.encodedUrl = encodedUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "URL{" +
+                "originalUrl='" + originalUrl + '\'' +
+                ", encodedUrl='" + encodedUrl + '\'' +
+                ", error=" + error +
+                ", errorMessage='" + errorMessage + '\'' +
+                '}';
     }
 }
