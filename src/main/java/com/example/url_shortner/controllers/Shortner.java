@@ -1,14 +1,10 @@
-package com.example.url_shortner;
+package com.example.url_shortner.controllers;
 
-import com.example.url_shortner.exceptions.UrlDaoException;
 import com.example.url_shortner.models.URL;
-import com.example.url_shortner.services.UrlServices;
+import com.example.url_shortner.controllers.UrlServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @RestController
 @CrossOrigin("http://127.0.0.1:3000")
@@ -24,5 +20,4 @@ public class Shortner {
         URL result = urlServices.findUrlByEncodedUrl(urlEncoded);
         return result;
     }
-
 }

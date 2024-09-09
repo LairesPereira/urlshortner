@@ -1,7 +1,7 @@
-package com.example.url_shortner;
+package com.example.url_shortner.controllers;
 
 import com.example.url_shortner.models.URL;
-import com.example.url_shortner.services.UrlServices;
+import com.example.url_shortner.controllers.UrlServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,12 +17,10 @@ public class ShortUrlCreator {
     @CrossOrigin("http://127.0.0.1:3000")
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public URL createNewShortUrl (@RequestParam String originalUrl){
-        System.out.println(originalUrl);
         URL url = new URL(originalUrl);
         if(urlServices.createNewShortUrl(url)) {
             return url;
         } else {
-            System.err.println("error");
             URL errorUrl = new URL();
             errorUrl.setError(true);
             errorUrl.setErrorMessage("URL já existente no servidor!");

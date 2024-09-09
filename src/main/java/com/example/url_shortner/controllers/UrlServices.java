@@ -1,8 +1,7 @@
-package com.example.url_shortner.services;
+package com.example.url_shortner.controllers;
 
 import com.example.url_shortner.DAO.DB;
 import com.example.url_shortner.DAO.UrlDAO;
-import com.example.url_shortner.exceptions.UrlDaoException;
 import com.example.url_shortner.models.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
