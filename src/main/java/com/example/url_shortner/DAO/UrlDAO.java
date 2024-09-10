@@ -37,12 +37,12 @@ public class UrlDAO {
         }
     }
 
-    public int removeUrl(String url) {
+    public int removeUrl(String originalUrl) {
         conn = DB.getConnection();
         String query = "DELETE FROM Urls WHERE originalUrl = ?";
         try {
             PreparedStatement pstm = conn.prepareStatement(query);
-            pstm.setString(1, url);
+            pstm.setString(1, originalUrl);
             return pstm.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

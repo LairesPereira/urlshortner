@@ -13,7 +13,7 @@ public class UrlServices {
     Connection conn = DB.getConnection();
 
     @Autowired
-    UrlDAO urlDAO;
+    UrlDAO urlDAO = new UrlDAO();
 
     public URL findUrlByEncodedUrl(String urlEncoded) {
         URL url = new URL();
@@ -33,6 +33,8 @@ public class UrlServices {
     }
 
     public boolean createNewShortUrl(URL url) {
+        if(url == null || url.getOriginalUrl() == null) return false;
+
         int conflictControlCounter = 0;
         try {
             while(urlDAO.findUrl(url.getEncodedUrl()).next()) { // check if the encoded random key already exists, if so, re-generate encoded key
@@ -49,7 +51,7 @@ public class UrlServices {
         }
     }
 
-    public boolean removeUrl(String url) {
-        return urlDAO.removeUrl(url) == 1;
+    public boolean removeUrl(String originalUrl) {
+        return urlDAO.removeUrl(originalUrl) == 1;
     }
 }
