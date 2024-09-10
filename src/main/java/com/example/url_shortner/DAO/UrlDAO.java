@@ -36,4 +36,16 @@ public class UrlDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public int removeUrl(String url) {
+        conn = DB.getConnection();
+        String query = "DELETE FROM Urls WHERE originalUrl = ?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setString(1, url);
+            return pstm.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

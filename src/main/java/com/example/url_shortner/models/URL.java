@@ -8,14 +8,19 @@ public class URL {
     private boolean error;
     private String errorMessage;
 
+    public URL() {}
+
     public URL(String originalUrl) {
         this.originalUrl = originalUrl;
         encodedUrl();
     }
 
-    public URL() {}
+    public URL(String originalUrl, String encodedUrl) {
+        this.originalUrl = originalUrl;
+        this.encodedUrl = encodedUrl;
+    }
 
-    public boolean isError() {
+    public boolean hasError() {
         return error;
     }
 
@@ -29,11 +34,6 @@ public class URL {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
-    }
-
-    public URL(String originalUrl, String encodedUrl) {
-        this.originalUrl = originalUrl;
-        this.encodedUrl = encodedUrl;
     }
 
     private void encodedUrl() {

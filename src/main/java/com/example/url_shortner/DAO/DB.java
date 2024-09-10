@@ -10,21 +10,23 @@ import java.util.Properties;
 
 @Service
 public class DB {
-
     private static Connection conn = null;
-
     public static Connection getConnection() {
-        if (conn == null) {
-            try {
-                Properties props = loadProperties();
-                String url = props.getProperty("spring.datasource.url");
-                String user = props.getProperty("spring.datasource.username");
-                String password = props.getProperty("spring.datasource.password");
-                conn = DriverManager.getConnection(url, user, password);
-            } catch (SQLException e) {
-                System.err.println(e);
+        try{
+            if (conn == null || conn.isClosed()){
+                try {
+                    Properties props = loadProperties();
+                    String url = props.getProperty("spring.datasource.url");
+                    String user = props.getProperty("spring.datasource.username");
+                    String password = props.getProperty("spring.datasource.password");
+                    conn = DriverManager.getConnection(url, user, password);
+                } catch (SQLException e) {
+                    System.err.println(e);
+                }
             }
-        }
+        } catch (SQLException e) {
+            System.err.println(e);
+        };
         return conn;
     }
 

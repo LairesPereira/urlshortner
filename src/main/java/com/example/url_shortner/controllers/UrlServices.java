@@ -17,7 +17,6 @@ public class UrlServices {
 
     public URL findUrlByEncodedUrl(String urlEncoded) {
         URL url = new URL();
-        System.out.println("new request");
         try {
             ResultSet resultSet = urlDAO.findUrl(urlEncoded);
             if(resultSet.next()) {
@@ -37,7 +36,6 @@ public class UrlServices {
         int conflictControlCounter = 0;
         try {
             while(urlDAO.findUrl(url.getEncodedUrl()).next()) { // check if the encoded random key already exists, if so, re-generate encoded key
-                System.err.println("conflict");
                 url.renewEncodedUrl();
                 conflictControlCounter++;
                 if (conflictControlCounter > 10) { // prevents infinite loop
@@ -49,5 +47,9 @@ public class UrlServices {
             System.err.println(e);
             return false;
         }
+    }
+
+    public boolean removeUrl(String url) {
+        return urlDAO.removeUrl(url) == 1;
     }
 }

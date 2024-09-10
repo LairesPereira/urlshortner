@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ShortUrlCreator {
-    @Autowired
-    UrlServices urlServices;
+//    @Autowired
+    UrlServices urlServices = new UrlServices();
 
     @CrossOrigin("http://127.0.0.1:3000")
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
